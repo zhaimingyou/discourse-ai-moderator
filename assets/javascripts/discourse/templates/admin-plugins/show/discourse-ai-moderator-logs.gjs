@@ -1,3 +1,4 @@
+import { concat } from "@ember/helper";
 import DBreadcrumbsItem from "discourse/ui-kit/d-breadcrumbs-item";
 import DButton from "discourse/ui-kit/d-button";
 import DConditionalLoadingSpinner from "discourse/ui-kit/d-conditional-loading-spinner";
@@ -90,9 +91,9 @@ export default <template>
               <tr class="ai-moderator-log-row -{{log.decision}}">
                 <td class="ai-moderator-time">{{log.created_at}}</td>
                 <td>
-                  <span
-                    class="ai-moderator-decision -{{log.decision}}"
-                  >{{log.decision}}</span>
+                  <span class="ai-moderator-decision -{{log.decision}}">
+                    {{i18n (concat "ai_moderator.admin.decision." log.decision)}}
+                  </span>
                 </td>
                 <td>{{log.username}}</td>
                 <td class="ai-moderator-title">{{log.title}}</td>
