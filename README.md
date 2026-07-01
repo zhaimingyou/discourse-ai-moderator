@@ -76,16 +76,55 @@ git clone https://github.com/zhaimingyou/discourse-ai-moderator.git
 
 ## 更新
 
+本插件通过 volume 挂载 + git clone 部署（宿主机 `git pull`，容器经 bind 挂载即时可见）。
+根据改动类型，更新方式不同——**都不需要整站 `./launcher rebuild`**。
+
 ```bash
 # 本地改代码 → push
 git commit -am "..." && git push
 
-# 服务器拉取 + 重启（纯后端改动无需 rebuild）
+# 服务器拉取
+ssh ml@<server>
 cd /var/discourse/shared/standalone/plugins/discourse-ai-moderator && git pull
+```
+
+### 纯后端改动（Ruby：plugin.rb / job / controller / lib）
+
+```bash
 docker exec app sv restart unicorn
 ```
 
-> 若改动包含前端资源（JS/gjs/scss），需 `./launcher rebuild app` 重新编译。
+### 含数据库迁移（新增 db/migrate/*.rb）
+
+```bash
+docker exec app bash -c 'cd /var/www/discourse && \
+  sudo -E -u discourse LOAD_PLUGINS=1 RAILS_ENV=production bundle exec rake db:migrate'
+docker exec app sv restart unicorn
+```
+
+### 含前端资源（JS / gjs / scss / 客户端 locale）
+
+> ⚠️ **本版本（Discourse 2026.6+）前端已从 ember-cli 换成 rolldown**，JS 工作区从
+> `app/assets/javascripts/discourse` 移到了 `frontend/discourse`。前端改动的正确编译流程是
+> **`pnpm build` → `rake assets:precompile` → 重启**，无需 `./launcher rebuild`。
+
+```bash
+docker exec app bash -c 'cd /var/www/discourse && \
+  sudo -E -u discourse HOME=/tmp RAILS_ENV=production pnpm build'                    # rolldown 构建 JS → frontend/discourse/dist
+docker exec app bash -c 'cd /var/www/discourse && \
+  sudo -E -u discourse HOME=/tmp RAILS_ENV=production bundle exec rake assets:precompile'  # 指纹化 → public/assets/js/plugins/
+docker exec app sv restart unicorn
+```
+
+验证前端已编译：
+
+```bash
+docker exec app bash -c 'ls /var/www/discourse/public/assets/js/plugins/ | grep ai-moderator'
+```
+
+> 说明：以 `discourse` 用户跑（`sudo -E -u discourse`），因为容器内 Postgres 走 socket +
+> peer 认证；`HOME=/tmp` 避免 `/root` 不可写的告警。命令里对 `get.discourse.org` /
+> MaxMind 的网络告警可忽略，不影响资源编译。
 
 ## 许可
 
