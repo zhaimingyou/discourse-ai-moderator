@@ -1,0 +1,27 @@
+en:
+  ai_moderator:
+    admin:
+      title: "AI Moderator"
+      status_on: "Enabled"
+      status_off: "Disabled"
+      enable: "Enable"
+      disable: "Disable"
+      refresh: "Refresh"
+      uncertain_policy: "On uncertain"
+      empty: "No moderation records yet."
+      logs:
+        nav_title: "Logs"
+        title: "AI Moderation Logs"
+        description: "Recent automatic decisions on queued new-user posts. Toggle moderation and review what the model approved, rejected, or held for human review."
+      stats:
+        approve: "Approved"
+        reject: "Rejected"
+        hold: "Held"
+        error: "Errors"
+        total: "Total"
+      table:
+        time: "Time"
+        decision: "Decision"
+        user: "User"
+        title: "Title"
+        reason: "Reason"

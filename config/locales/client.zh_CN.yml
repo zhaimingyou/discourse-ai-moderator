@@ -1,0 +1,27 @@
+zh_CN:
+  ai_moderator:
+    admin:
+      title: "AI 审核"
+      status_on: "已启用"
+      status_off: "已停用"
+      enable: "启用"
+      disable: "停用"
+      refresh: "刷新"
+      uncertain_policy: "拿不准时"
+      empty: "暂无审核记录。"
+      logs:
+        nav_title: "日志"
+        title: "AI 审核日志"
+        description: "新用户待审帖的最近自动判定记录。可在此开关审核，并查看模型放行、拒绝或留给人工的内容。"
+      stats:
+        approve: "已放行"
+        reject: "已拒绝"
+        hold: "已留人工"
+        error: "错误"
+        total: "总计"
+      table:
+        time: "时间"
+        decision: "判定"
+        user: "用户"
+        title: "标题"
+        reason: "原因"
