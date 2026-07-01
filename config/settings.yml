@@ -1,0 +1,32 @@
+plugins:
+  ai_moderator_enabled:
+    default: false
+    client: true
+  ai_moderator_llm_url:
+    default: "http://172.17.0.1:19119/v1"
+    description: "LLM API base URL (OpenAI-compatible). Default reuses the local Qwen model on the DGX Spark host."
+  ai_moderator_llm_key:
+    default: ""
+    description: "API key (Bearer) for the LLM service."
+    secret: true
+  ai_moderator_llm_model:
+    default: "Qwen3.6-35B-A3B-DSV4Pro-Distill-MTP-Q5_K_M-imatrix.gguf"
+    description: "Model name used for moderation judgements."
+  ai_moderator_request_timeout:
+    default: 90
+    min: 10
+    max: 600
+  ai_moderator_on_uncertain:
+    default: "hold"
+    type: enum
+    choices:
+      - hold
+      - approve
+      - reject
+  ai_moderator_max_content_chars:
+    default: 4000
+    min: 500
+    max: 12000
+  ai_moderator_system_prompt:
+    default: "你是论坛内容审核员。根据以下规则判断帖子/评论是否通过审核：\n\n✅ APPROVE（通过）：\n- 正常的技术讨论、提问、经验分享\n- 有价值的观点表达、理性辩论\n- 社区建设建议、资源推荐（非商业推广）\n\n❌ REJECT（拒绝）：\n- 商业广告、产品推广、加微信/QQ引流\n- 人身攻击、辱骂、恶意引战\n- 色情、暴力、违法内容\n- 纯灌水/无意义内容（如 顶、11111、test）\n- 明显诈骗信息\n\n只回复一个词：APPROVE 或 REJECT，不要解释。"
+    type: textarea

@@ -1,0 +1,13 @@
+*.gem
+*.rbc
+.bundle
+.ruby-version
+.ruby-gemset
+.DS_Store
+node_modules
+auto_generated
+.idea
+.vscode
+coverage
+log/*.log
+tmp/

@@ -1,0 +1,10 @@
+zh_CN:
+  site_settings:
+    ai_moderator_enabled: "启用 AI 自动审核（处理新用户进入审核队列的待审帖/回复）。"
+    ai_moderator_llm_url: "LLM API 基址（OpenAI 兼容）。默认复用 DGX Spark 宿主机上的本地 Qwen 模型。"
+    ai_moderator_llm_key: "LLM 服务的 API Key（Bearer）。"
+    ai_moderator_llm_model: "用于审核判断的模型名。"
+    ai_moderator_request_timeout: "单次审核调用的超时时间（秒）。"
+    ai_moderator_on_uncertain: "当模型拿不准或调用失败时的处理：hold（留给人工）、approve（放行）、reject（拒绝）。"
+    ai_moderator_max_content_chars: "发送给模型的帖子正文最大字符数。"
+    ai_moderator_system_prompt: "定义审核规则的系统提示词。模型须只回复一个词：APPROVE 或 REJECT。"

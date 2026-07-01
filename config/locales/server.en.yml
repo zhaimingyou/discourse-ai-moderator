@@ -1,0 +1,10 @@
+en:
+  site_settings:
+    ai_moderator_enabled: "Enable AI auto-moderation of queued new-user posts."
+    ai_moderator_llm_url: "LLM API base URL (OpenAI-compatible). Default reuses the local Qwen model on the DGX Spark host."
+    ai_moderator_llm_key: "API key (Bearer) for the LLM service."
+    ai_moderator_llm_model: "Model name used for moderation judgements."
+    ai_moderator_request_timeout: "Timeout (seconds) for a single LLM moderation call."
+    ai_moderator_on_uncertain: "What to do when the model is uncertain or the call fails: hold (leave for human), approve, or reject."
+    ai_moderator_max_content_chars: "Maximum characters of post body sent to the model."
+    ai_moderator_system_prompt: "System prompt that defines the moderation rules. The model must reply with a single word: APPROVE or REJECT."
