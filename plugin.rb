@@ -16,6 +16,7 @@ after_initialize do
   require_relative "app/models/ai_moderator_log"
   require_relative "lib/discourse_ai_moderator/llm_client"
   require_relative "app/jobs/regular/ai_moderate_reviewable"
+  require_relative "app/jobs/scheduled/ai_moderate_pending_reviewables"
   require_relative "app/controllers/discourse_ai_moderator/admin/ai_moderator_controller"
 
   # Admin page: Admin -> Plugins -> AI Moderator
